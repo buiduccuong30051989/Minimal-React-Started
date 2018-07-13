@@ -1,3 +1,4 @@
+
 module.exports = {
   module: {
     rules: [
@@ -5,7 +6,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-
         options: {
           presets: ['env']
         }
@@ -27,10 +27,13 @@ module.exports = {
       }
     ]
   },
-  entry: 0,
+  entry: [
+    './src/index.js'
+  ],
   output: {
-    path: path.resolve(__dirname, 'dist')
+    path: __dirname + '/dist',
+    publicPath: '/',
+    filename: 'bundle.js'
   },
-
   mode: 'development'
 };

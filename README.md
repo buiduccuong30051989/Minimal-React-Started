@@ -1,43 +1,69 @@
-1. npm init -y
-2. cd minimal / touch index.html
-  ```html
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <title>The Minimal React Webpack Babel Setup</title>
-    </head>
-    <body>
-      <div id="app"></div>
-      <script src="/bundle.js"></script>
-    </body>
-  </html>
-  ```
+1. Create:
+    - src/index.js
+    - .gitignored
+    - index.html
+2. `npm init`
 3. `npm install -D webpack webpack-dev-server webpack-cli`
-  ```
-  //Folder Structure:
-  - dist
-  -- index.html
-  - node_modules
-  - package.json
-  ```
-4. From root folder:
-  `touch webpack.config.js`
-  or you can: `webpack init`
-  it will give you some choice:
-  - ? Will you be creating multiple bundles?
-  - ? Which module will be the first to enter the application? ./src/index.js
-  - ? Which folder will your generated bundles be in? [default: dist]:
-  - ? Are you going to use this in production?
-  - ? Will you be using ES2015?
-  - ? Will you use one of the below CSS solutions? CSS
-  - ? If you want to bundle your CSS files, what will you name the bundle? (press en
-ter to skip)
-  - ? Name your 'webpack.[name].js?' [default: 'prod']: config
-5. package.json
+4. `webpack init` (first: `npm install -g webpack webpack-cli`) --> generate webpack.config.js
+5. edit webpack.config.js
   ```javascript
+  module.exports = {
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          options: {
+            presets: ['env']
+          }
+        },
+        {
+          test: /\.(scss|css)$/,
+
+          use: [
+            {
+              loader: 'style-loader'
+            },
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
+        }
+      ]
+    },
+    entry: [
+      './src/index.js'
+    ],
+    output: {
+      path: __dirname + '/dist',
+      publicPath: '/',
+      filename: 'bundle.js'
+    },
+    mode: 'development'
+  };
+  ```
+6. package.json
+  ```javascript
+    ...
     "scripts": {
-      "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+      "start": "webpack-dev-server --config ./webpack.config.js",
       ...
     },
+    ...
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "babel": {
+      "presets": [
+        "env",
+        "react",
+        "stage-0"
+      ]
+    },
+    "devDependencies": {
+    ...
   ```
-6.  
