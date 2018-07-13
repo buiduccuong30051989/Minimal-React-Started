@@ -41,5 +41,11 @@ module.exports = {
     contentBase: __dirname + '/',
     hot: true
   },
+  resolve: {
+    modules: ['src', 'node_modules'],
+    extensions: [
+      '.js',
+    ],
+  },
   mode: 'development'
 };
