@@ -1,0 +1,12 @@
+{
+  "name": "minimal-react-testing",
+  "version": "1.0.0",
+  "description": "testing with jest, enzyme, coverage, react, babel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack"
+  },
+  "author": "bui duc cuong",
+  "license": "ISC"
+}
