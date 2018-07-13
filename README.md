@@ -149,3 +149,29 @@ Check step by step config in commit history
   },
   ...
   ```
+9. `npm install -D jest enzyme enzyme-adapter-react-16 enzyme-to-json`
+10. create setupEnzyme.js
+  ```javascript
+  import Enzyme from 'enzyme';
+  import Adapter from 'enzyme-adapter-react-16';
+
+  Enzyme.configure({ adapter: new Adapter() });
+  ```
+11. package.json
+  ```javascript
+  ...
+  "scripts": {
+    "test": "jest --coverage",
+    ...
+  },
+  ...
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>__tests__/setup/setupEnzyme.js",
+    "testPathIgnorePatterns": ["<rootDir>/__tests__/setup/"],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  }
+  ...
+  ```
